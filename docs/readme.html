@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>GUI-Wrapper</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="gui-wrapper">GUI-Wrapper</h1>
+<blockquote>
+<p>Archive for quick &amp; easy GUI development with tkinter, if wished so with tkHtml as well.</p>
+<p>Provides a class to build a GUI quickly row-by-row with TKinter.</p>
+<p>The ways to access to the most common elements (for my useCases) are shortend a bit...</p>
+</blockquote>
+<ul>
+<li><a href="#gui-wrapper">GUI-Wrapper</a></li>
+<li><a href="#available-keywords-for-tuple-in-elements">Available keywords for tuple in elements:</a>
+<ul>
+<li><a href="#available-options-for-element_keyword-and-corresponding-datatypestructure-for-its-param">Available options for ELEMENT_KEYWORD and corresponding datatype/structure for its PARAM:</a></li>
+</ul>
+</li>
+<li><a href="#examples--usage">Examples / Usage:</a></li>
+<li><a href="#prerequirements">Prerequirements</a></li>
+</ul>
+<p>This project is still in progress... There are a few known issues, as I just started to elaborate this module for my 'every-now-and-then-applications' in which I want to use only tkinter -- When it grows more, I often fall back on PySimpleGui, which is actually the general idea of construction a layout of the window. (maybe this is just unneccessary - but then it was a nice practise for me at least ;-)</p>
+<h1 id="available-keywords-for-tuple-in-elements">Available keywords for tuple in elements:</h1>
+<pre><code>- &quot;lbl&quot;      : Param:  &quot;caption_for_label&quot;          
+- &quot;btn&quot;      : Param:  (&quot;caption&quot;, command_function)
+- &quot;cmb&quot;      : Param:  (&quot;option1&quot;, &quot;option2&quot;)       
+- &quot;chkbx&quot;    : Param:  [&quot;lbl_caption&quot;, tk.IntVar()] 
+- &quot;radiobtn&quot; : Param:  [&quot;lbl_caption&quot;, tk.IntVar()] 
+- &quot;sep&quot;      : Param:  vertical_distance 
+- &quot;lbl_html&quot; : Param:  &quot;caption &lt;u&gt; with &lt;/u&gt; html&quot;   
+- &quot;img_html&quot; : Param:  &quot;path/to/image/source.png&quot;  
+- &quot;txt&quot;      : Param:  ??? # TODO...                
+</code></pre>
+<ul>
+<li>Structure of each tuple of the tuple in elements:
+<ul>
+<li><code>(x_position, ELEMENT_KEYWORD, PARAM)</code></li>
+</ul>
+</li>
+<li>with the followiing datatypes:
+<ul>
+<li><code>(int, str, DEPENDS_ON_ELEMENT)</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="available-options-for-element_keyword-and-corresponding-datatypestructure-for-its-param">Available options for ELEMENT_KEYWORD and corresponding datatype/structure for its PARAM:</h2>
+<table>
+<thead>
+<tr>
+<th>KEYWORD</th>
+<th>element</th>
+<th>datatype of PARAM</th>
+<th>example &amp; meaning of PARAM</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&quot;lbl&quot;</td>
+<td>label</td>
+<td>str</td>
+<td>&quot;caption_for_label&quot;</td>
+</tr>
+<tr>
+<td>&quot;btn&quot;</td>
+<td>button</td>
+<td>tuple</td>
+<td>(&quot;caption&quot;, command_function)</td>
+</tr>
+<tr>
+<td>&quot;cmb&quot;</td>
+<td>combobox</td>
+<td>tuple</td>
+<td>(&quot;option1&quot;, &quot;option2&quot;)</td>
+</tr>
+<tr>
+<td>&quot;chkbx&quot;</td>
+<td>checkbox</td>
+<td>tuple</td>
+<td>[&quot;lbl_caption&quot;, tk.IntVar()]</td>
+</tr>
+<tr>
+<td>&quot;radiobtn&quot;</td>
+<td>radiobutton</td>
+<td>tuple</td>
+<td>[&quot;lbl_caption&quot;, tk.IntVar()]</td>
+</tr>
+<tr>
+<td>&quot;sep&quot;</td>
+<td>seperatorline</td>
+<td>int</td>
+<td>vertical_distance</td>
+</tr>
+<tr>
+<td>&quot;txt&quot;</td>
+<td>Entry</td>
+<td>???</td>
+<td># TODO...</td>
+</tr>
+<tr>
+<td>&quot;lbl_html&quot;</td>
+<td>label (html)</td>
+<td>str</td>
+<td>&quot;caption &lt;u&gt; with &lt;/u&gt; html&quot;</td>
+</tr>
+<tr>
+<td>&quot;img_html&quot;</td>
+<td>image (html)</td>
+<td>str</td>
+<td>&quot;path/to/image/file.png&quot;</td>
+</tr>
+</tbody>
+</table>
+<h1 id="examples--usage">Examples / Usage:</h1>
+<p>Example for a row with following elements in the row (from left to right):</p>
+<ul>
+<li>checkbox with a label</li>
+<li>label</li>
+<li>button with a label on it and the command=sys.exit</li>
+</ul>
+<p>Thereby self.root is a <a href="http://tk.Tk">tk.Tk</a> object and implemented in an extra class.
+By the method 'get_last_y' the last y-position will be stored in y,
+so this y can be used for the next row (with adding an offset before...)</p>
+<p>All needed tk-Variables have to be initialized (and optionally they have
+to be set to an initial value)  before calling this method,
+so that the variable can be passed into the constructor.</p>
+<pre><code>self.state_checkbox = tk.IntVar() 
+
+y = GuiElementsRow(root=self.root, y=10, elements=[
+    (10, &quot;chkbx&quot;, (&quot;Text of checkbox&quot;, self.state_checkbox)),
+    (100, &quot;lbl&quot;, &quot;This is the caption of the label&quot;),
+    (200, &quot;btn&quot;, (&quot;Cancel&quot;, sys.exit)),
+]).get_last_y()
+</code></pre>
+<p><img src="file:///d:\Dokumente\Wiederholprogramme fuer Routineaufgaben Tools\GUIs\gui-wrapper\docs\demo_gui.png" alt="Demo GUI with tkhtmlview installed">
+<img src="file:///d:\Dokumente\Wiederholprogramme fuer Routineaufgaben Tools\GUIs\gui-wrapper\docs\demo_gui_without_html.png" alt="Demo GUI without tkhtmlview installed"></p>
+<h1 id="prerequirements">Prerequirements</h1>
+<ul>
+<li>
+<p>Nothing at all except a python (&gt; 3.x.y) distrubtion.</p>
+</li>
+<li>
+<p>In order to use the html-elements as well, you will have to install tkhtmlview:</p>
+<pre><code>  `pip install tkhtmlview`
+</code></pre>
+</li>
+<li>
+<p>Without this module you can use all elements, it won't raise an error, but print a warning, that you will not be able to render html. If you use html-elements, they will be redirected to &quot;usual&quot; Tkinter elements such as labels.</p>
+</li>
+</ul>
+
+            
+            
+        </body>
+        </html>
